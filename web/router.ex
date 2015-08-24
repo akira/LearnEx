@@ -17,6 +17,8 @@ defmodule LearnEx.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    resources "/problems", ProblemController
   end
 
   # Other scopes may use custom stacks.

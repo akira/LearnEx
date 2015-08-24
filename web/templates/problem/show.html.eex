@@ -1,0 +1,26 @@
+<h2><%= @problem.title %></h2>
+<hr />
+
+<table>
+  <tr>
+    <td>Difficulty:</td>
+    <td><%= @problem.difficulty %></td>
+  </tr>
+  <tr>
+    <td>Tags:</td>
+    <td><%= @problem.tags %></td>
+  </tr>
+</table>
+
+<div class="prob-desc">
+  <%= {:safe, @problem.description} %>
+
+  <table class="testcases">
+    <%= for test <- @problem.tests do %>
+      <tr>
+        <td>O&nbsp;</td>
+        <td><pre class="test"><%= test %></pre></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
