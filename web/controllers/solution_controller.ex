@@ -9,19 +9,19 @@ defmodule LearnEx.SolutionController do
   def new(conn, %{"problem_id" => problem_id}) do
     problem = Repo.get!(Problem, problem_id)
     changeset = Solution.changeset(%Solution{})
-    render(conn, "new.html", changeset: changeset, problem: problem)
+    render(conn, "new.html", changeset: changeset, test_results: [], problem: problem)
   end
 
   def create(conn, %{"solution" => solution_params, "problem_id" => problem_id}) do
     changeset = Solution.changeset(%Solution{}, solution_params)
     problem = Repo.get!(Problem, problem_id)
-    case Repo.insert(changeset) do
-      {:ok, _solution} ->
-        conn
-        |> put_flash(:info, "Solution created successfully.")
-        |> redirect(to: problem_path(conn, :index))
+    case Problem.solve(problem, solution_params["code"]) do
+      {:ok, test_results} ->
+        render(conn, "new.html", test_results: test_results, changeset: changeset, problem: problem)
+      {:tests_failed, test_results} ->
+        render(conn, "new.html", test_results: test_results, changeset: changeset, problem: problem)
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset, problem: problem)
+        render(conn, "new.html", test_results: [], changeset: changeset, problem: problem)
     end
   end
 

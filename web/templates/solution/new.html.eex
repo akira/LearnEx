@@ -16,13 +16,22 @@
   <%= {:safe, @problem.description} %>
 
   <table class="testcases">
-    <%= for test <- @problem.tests do %>
+    <%= for {test, i} <- Enum.with_index(@problem.tests) do %>
       <tr>
-        <td>O&nbsp;</td>
+        <td><img src="<%= static_path(@conn, image_for_test(@test_results, i)) %>"/></td>
         <td><pre class="test"><%= test %></pre></td>
       </tr>
     <% end %>
   </table>
+  <%= unless Enum.empty?(@test_results) do %>
+    <%= if Enum.all?(@test_results) do %>
+      <div class="alert alert-success">
+        Congratulations, you've solved the problem! See the solutions that the users you follow have submitted, or share this solution on github and twitter! Now try "NEXT PROBLEM + LINK"!
+      </div>
+    <% else %>
+      <div class="alert alert-danger">You failed the unit tests</div>
+    <% end %>
+  <% end %>
 </div>
 
 <%= form_for @changeset, problem_solution_path(@conn, :create, @problem.id), fn f -> %>
