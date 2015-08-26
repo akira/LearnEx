@@ -2,6 +2,7 @@ defmodule LearnEx.ProblemController do
   use LearnEx.Web, :controller
 
   alias LearnEx.Problem
+  alias LearnEx.Solution
 
   plug :scrub_params, "problem" when action in [:create, :update]
 
@@ -30,7 +31,8 @@ defmodule LearnEx.ProblemController do
 
   def show(conn, %{"id" => id}) do
     problem = Repo.get!(Problem, id)
-    render(conn, "show.html", problem: problem)
+    changeset = Solution.changeset(%Solution{})
+    render(conn, "show.html", problem: problem, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do

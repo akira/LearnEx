@@ -24,3 +24,13 @@
     <% end %>
   </table>
 </div>
+
+<%= form_for @changeset, solution_path(@conn, :create), fn f -> %>
+  <div class="form-group">
+    <%= label f, :code, "Code which fills in the blank", class: "control-label" %>
+    <%= textarea f, :code, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= submit "Run", class: "btn btn-primary" %>
+  </div>
+<% end %>
