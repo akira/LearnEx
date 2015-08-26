@@ -14,7 +14,7 @@
   <tbody>
 <%= for problem <- @problems do %>
     <tr>
-      <td><%= link problem.title, to: problem_path(@conn, :show, problem) %></td>
+      <td><%= link problem.title, to: problem_solution_path(@conn, :new, problem.id) %></td>
       <td><%= problem.difficulty %></td>
       <td><%= problem.tags %></td>
       <td><%= problem.times_solved %></td>

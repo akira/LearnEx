@@ -18,8 +18,10 @@ defmodule LearnEx.Router do
 
     get "/", PageController, :index
 
-    resources "/problems", ProblemController
-    resources "/solutions", SolutionController
+    resources "problems", ProblemController do
+      resources "solutions", SolutionController
+    end
+
   end
 
   # Other scopes may use custom stacks.

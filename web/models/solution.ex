@@ -3,7 +3,7 @@ defmodule LearnEx.Solution do
 
   schema "solutions" do
     #belongs_to :user, User
-    belongs_to :problem, Problem
+    has_one :problem, Problem
     field :code, :string
 
     timestamps
