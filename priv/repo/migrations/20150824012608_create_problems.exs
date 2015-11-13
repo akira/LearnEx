@@ -3,12 +3,13 @@ defmodule LearnEx.Repo.Migrations.CreateProblems do
 
   def change do
     create table(:problems) do
-      add :approved,     :boolean
+      add :approved,     :boolean, default: false
       add :title,        :string
       add :times_solved, :integer
-      add :tests,        :map
+      add :tests,        {:array, :string}
       add :description,  :text
-      add :tags,         :map
+      add :difficulty,   :string
+      add :tags,         {:array, :string}
 
       timestamps
     end

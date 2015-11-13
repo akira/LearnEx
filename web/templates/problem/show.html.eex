@@ -1,0 +1,36 @@
+<h2><%= @problem.title %></h2>
+<hr />
+
+<table>
+  <tr>
+    <td>Difficulty:</td>
+    <td><%= @problem.difficulty %></td>
+  </tr>
+  <tr>
+    <td>Tags:</td>
+    <td><%= @problem.tags %></td>
+  </tr>
+</table>
+
+<div class="prob-desc">
+  <%= {:safe, @problem.description} %>
+
+  <table class="testcases">
+    <%= for test <- @problem.tests do %>
+      <tr>
+        <td>O&nbsp;</td>
+        <td><pre class="test"><%= test %></pre></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= form_for @changeset, problem_solution_path(@conn, :create, @problem.id), fn f -> %>
+  <div class="form-group">
+    <%= label f, :code, "Code which fills in the blank", class: "control-label" %>
+    <%= textarea f, :code, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= submit "Run", class: "btn btn-primary" %>
+  </div>
+<% end %>
