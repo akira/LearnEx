@@ -1,5 +1,10 @@
 # LearnEx
 
+An Elixir/Phoenix project attempting to create a browser based tool for learning Elixir (based off [4clojure](https://www.4clojure.com/)). 
+
+This is a WIP.
+
+# Instructions
 To start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`
